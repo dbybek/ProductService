@@ -1,5 +1,6 @@
 package com.dbybek.ProductService.Controller;
 
+import com.dbybek.ProductService.Service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,12 @@ public class ProductController {
 //            "category": "Electronic",
 //            "image": "http://example.com"
 //    }
+
+    private ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping("/products") /* This is my API end point or API url "/products".
                                  Whenever someone is hitting /products with post request
@@ -40,6 +47,6 @@ public class ProductController {
                                please execute the below method.
                             */
     public void getAllProduct() {
-
+        productService.getAllProducts();
     }
 }
