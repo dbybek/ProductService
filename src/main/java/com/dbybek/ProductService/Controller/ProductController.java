@@ -1,5 +1,6 @@
 package com.dbybek.ProductService.Controller;
 
+import com.dbybek.ProductService.Models.Product;
 import com.dbybek.ProductService.Service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +39,9 @@ public class ProductController {
                                     Whenever someone is doing a get request on /products/{id}
                                     please execute the below method.
                                  */
-    public void getProduct(@PathVariable("id") Long productId) {
-
+    public Product getProduct(@PathVariable("id") Long productId) {
+        Product currentProduct = productService.getSingleProduct(productId);
+        return  currentProduct;
     }
 
     @GetMapping("/products")/* This is my API end point or API url "/products/{id}".
