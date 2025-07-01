@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class FakeStoreProductService implements ProductService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public FakeStoreProductService (RestTemplate restTemplate){
         this.restTemplate = restTemplate;
@@ -23,7 +23,7 @@ public class FakeStoreProductService implements ProductService {
                 FakeStoreProductDto.class
         );
 
-        return fakeStoreProductDto.toProduct();
+        return fakeStoreProductDto!=null?fakeStoreProductDto.toProduct():null;
     }
 
     @Override

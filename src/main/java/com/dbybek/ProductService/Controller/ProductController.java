@@ -40,8 +40,7 @@ public class ProductController {
                                     please execute the below method.
                                  */
     public Product getProduct(@PathVariable("id") Long productId) {
-        Product currentProduct = productService.getSingleProduct(productId);
-        return  currentProduct;
+        return productService.getSingleProduct(productId);
     }
 
     @GetMapping("/products")/* This is my API end point or API url "/products/{id}".
