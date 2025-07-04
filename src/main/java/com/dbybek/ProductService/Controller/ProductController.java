@@ -2,10 +2,7 @@ package com.dbybek.ProductService.Controller;
 
 import com.dbybek.ProductService.Models.Product;
 import com.dbybek.ProductService.Service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController //Annotation for letting JVM know where all the API end points are there
 public class ProductController {
@@ -31,8 +28,8 @@ public class ProductController {
                                  Whenever someone is hitting /products with post request
                                  please execute the below method.
                               */
-    public void createProduct() {
-
+    public Product createProduct(@RequestBody Product product) {
+        return productService.createProduct(product);
     }
 
     @GetMapping("/products/{id}")/* This is my API end point or API url "/products/{id}".
