@@ -5,6 +5,7 @@ import com.dbybek.ProductService.dto.FakeStoreProductDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,20 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public List<Product> getAllProducts() {
         System.out.println("We are here.");
-        return null;
+        List<Product> response = new ArrayList<>();
+        FakeStoreProductDto[] fakeStoreAllProducts = restTemplate.getForObject(
+                "https://fakestoreapi.com/products",
+                FakeStoreProductDto[].class
+        );
+
+        if(fakeStoreAllProducts == null || fakeStoreAllProducts.length == 0){
+            return null;
+        }
+
+        for(FakeStoreProductDto prod:fakeStoreAllProducts){
+            response.add(prod.toProduct());
+        }
+        return response;
     }
 
     @Override
@@ -50,4 +64,9 @@ public class FakeStoreProductService implements ProductService {
 
         return response!=null?response.toProduct():null;
     }
+
+//    @Override
+//    public Product updateProduct(Product product) {
+//        return null;
+//    }
 }
