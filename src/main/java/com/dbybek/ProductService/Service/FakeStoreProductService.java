@@ -2,6 +2,8 @@ package com.dbybek.ProductService.Service;
 
 import com.dbybek.ProductService.Models.Product;
 import com.dbybek.ProductService.dto.FakeStoreProductDto;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,7 +31,6 @@ public class FakeStoreProductService implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
-        System.out.println("We are here.");
         List<Product> response = new ArrayList<>();
         FakeStoreProductDto[] fakeStoreAllProducts = restTemplate.getForObject(
                 "https://fakestoreapi.com/products",
@@ -65,8 +66,28 @@ public class FakeStoreProductService implements ProductService {
         return response!=null?response.toProduct():null;
     }
 
-//    @Override
-//    public Product updateProduct(Product product) {
-//        return null;
-//    }
+    @Override
+    public void deleteSingleProduct(Long productId) {
+        restTemplate.delete("https://fakestoreapi.com/products/"+productId);
+    }
+
+    @Override
+    public Product updateProduct(Long productId,Product product) {
+        FakeStoreProductDto fsProduct = new FakeStoreProductDto();
+        fsProduct.setId(productId);
+        fsProduct.setTitle(product.getTitle());
+        fsProduct.setCategory(product.getCategory().getTitle());
+        fsProduct.setPrice(product.getPrice());
+        fsProduct.setDescription(product.getDescription());
+        fsProduct.setImage(product.getImageUrl());
+
+        FakeStoreProductDto response = restTemplate.exchange(
+                "https://fakestoreapi.com/products"+productId,
+                HttpMethod.PUT,
+                new HttpEntity<>(fsProduct),
+                FakeStoreProductDto.class
+        ).getBody();
+
+        return response!=null?response.toProduct():null;
+    }
 }

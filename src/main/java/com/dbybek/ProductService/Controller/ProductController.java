@@ -55,12 +55,22 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-//    @PutMapping("/products/{id}")/* This is my API end point or API url "/products/{id}".
-//                                    Whenever someone is doing a put request on /products/{id}
-//                                    please execute the below method.
-//                                 */
-//    public Product updateProduct(@PathVariable("id") Long productId) {
-//
-//    }
+    @PutMapping("/products/{id}")/* This is my API end point or API url "/products/{id}".
+                                    Whenever someone is doing a put request on /products/{id}
+                                    please execute the below method.
+                                 */
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long productId) {
+        Product currentProduct = productService.updateProduct(productId,getProduct(productId).getBody());
+        ResponseEntity<Product> res = new ResponseEntity<>(currentProduct, HttpStatus.OK);
+        return res;
+    }
 
+    @DeleteMapping("/products/{id}")/* This is my API end point or url "/products/{id}".
+                                       Whenever someone is doing a delete request on /products/{id}
+                                       please execute the below method.
+                                    */
+    public ResponseEntity<String> deleteSingleProduct(@PathVariable("id") Long productId) {
+        productService.deleteSingleProduct(productId);
+        return ResponseEntity.ok("Product ID: "+productId+" has been successfully deleted.");
+    }
 }
