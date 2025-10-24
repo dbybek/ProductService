@@ -1,5 +1,6 @@
 package com.dbybek.ProductService.Service;
 
+import com.dbybek.ProductService.Exceptions.ProductNotAvailableException;
 import com.dbybek.ProductService.Models.Product;
 import com.dbybek.ProductService.dto.FakeStoreProductDto;
 import org.springframework.http.HttpEntity;
@@ -10,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
 
     private final RestTemplate restTemplate;
@@ -20,13 +21,16 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product getSingleProduct(Long productId) {
+    public Product getSingleProduct(Long productId) throws ProductNotAvailableException {
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
                 "https://fakestoreapi.com/products/"+productId,
                 FakeStoreProductDto.class
         );
 
-        return fakeStoreProductDto!=null?fakeStoreProductDto.toProduct():null;
+        if(fakeStoreProductDto==null){
+            throw new ProductNotAvailableException("Product not found with id: "+productId);
+        }
+        return fakeStoreProductDto.toProduct();
     }
 
     @Override

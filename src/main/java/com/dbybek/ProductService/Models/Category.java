@@ -1,5 +1,6 @@
 package com.dbybek.ProductService.Models;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
-    private Long id;
+@Entity
+public class Category extends BaseModel {
+//    private Long id; -> This field is extended from parent class BaseModel.
     private String title;
 }
