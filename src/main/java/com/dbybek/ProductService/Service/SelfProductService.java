@@ -31,7 +31,11 @@ public class SelfProductService implements ProductService{
 
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+        List<Product> products = productRepository.findAll();
+        if(products.isEmpty()){
+            return null;
+        }
+        return products;
     }
 
     @Override
@@ -48,12 +52,33 @@ public class SelfProductService implements ProductService{
             product.setCategory(cat);
         }
 
-        Product savedProduct = productRepository.save(product);
-        return savedProduct;
+//        Product savedProduct = productRepository.save(product);
+//        return savedProduct;
+        return productRepository.save(product);
     }
 
     @Override
     public Product updateProduct(Long productId, Product product) {
+        Category cat = categoryRepository.findByTitle(product.getCategory().getTitle());
+        if(cat==null){
+            // No category with our title in the database. So we create a new category.
+            Category newCat = new Category();
+            newCat.setTitle(product.getCategory().getTitle());
+            Category newRow = categoryRepository.save(newCat);
+            product.setCategory(newRow);
+        }
+        else{
+            product.setCategory(cat);
+        }
+        Optional<Product> existingProductOpt = productRepository.findById(productId);
+        if(existingProductOpt.isPresent()){
+            Product existingProduct = existingProductOpt.get();
+            existingProduct.setPrice(product.getPrice());
+            existingProduct.setDescription(product.getDescription());
+            existingProduct.setTitle(product.getTitle());
+            existingProduct.setImageUrl(product.getImageUrl());
+            return productRepository.save(existingProduct);
+        }
         return null;
     }
 
