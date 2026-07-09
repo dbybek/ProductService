@@ -1,4 +1,4 @@
-package com.dbybek.ProductService.Models;
+package com.dbybek.ProductService.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.dbybek.ProductService.Repositories.projections;
+package com.dbybek.ProductService.repository.projections;
 
 public interface ProductProjection {
     Long getId();

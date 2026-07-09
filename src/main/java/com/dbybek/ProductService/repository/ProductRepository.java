@@ -1,7 +1,7 @@
-package com.dbybek.ProductService.Repositories;
+package com.dbybek.ProductService.repository;
 
-import com.dbybek.ProductService.Models.Product;
-import com.dbybek.ProductService.Repositories.projections.ProductProjection;
+import com.dbybek.ProductService.entity.Product;
+import com.dbybek.ProductService.repository.projections.ProductProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,6 +1,6 @@
-package com.dbybek.ProductService.Repositories;
+package com.dbybek.ProductService.repository;
 
-import com.dbybek.ProductService.Models.Category;
+import com.dbybek.ProductService.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {

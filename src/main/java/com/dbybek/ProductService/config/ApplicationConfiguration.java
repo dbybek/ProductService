@@ -1,4 +1,4 @@
-package com.dbybek.ProductService.Configs;
+package com.dbybek.ProductService.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

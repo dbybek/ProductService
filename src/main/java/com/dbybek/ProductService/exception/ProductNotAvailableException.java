@@ -1,4 +1,4 @@
-package com.dbybek.ProductService.Exceptions;
+package com.dbybek.ProductService.exception;
 
 public class ProductNotAvailableException extends Exception {
     public ProductNotAvailableException(String message){

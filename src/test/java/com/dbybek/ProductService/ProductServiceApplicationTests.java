@@ -1,9 +1,9 @@
 package com.dbybek.ProductService;
 
-import com.dbybek.ProductService.Models.Category;
-import com.dbybek.ProductService.Models.Product;
-import com.dbybek.ProductService.Repositories.CategoryRepository;
-import com.dbybek.ProductService.Repositories.ProductRepository;
+import com.dbybek.ProductService.entity.Category;
+import com.dbybek.ProductService.entity.Product;
+import com.dbybek.ProductService.repository.CategoryRepository;
+import com.dbybek.ProductService.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

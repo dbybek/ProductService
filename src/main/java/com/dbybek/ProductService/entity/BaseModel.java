@@ -1,4 +1,4 @@
-package com.dbybek.ProductService.Models;
+package com.dbybek.ProductService.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -1,7 +1,7 @@
 package com.dbybek.ProductService.dto;
 
-import com.dbybek.ProductService.Models.Category;
-import com.dbybek.ProductService.Models.Product;
+import com.dbybek.ProductService.entity.Category;
+import com.dbybek.ProductService.entity.Product;
 import lombok.Getter;
 import lombok.Setter;
 
