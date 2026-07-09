@@ -39,7 +39,7 @@ public class ProductMapper {
         return dto;
     }
 
-    // TODO: Remove these validation checks after implementing Jakarta Bean Validation (@Valid).
+    // TODO: Remove these validation checks after implementing Jakarta Bean Validation (@Valid) on Day 4.
     public void updateEntity(Product product, UpdateProductDTO dto){
         if(dto == null){
             return;
