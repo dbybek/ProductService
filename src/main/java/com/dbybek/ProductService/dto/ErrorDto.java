@@ -33,11 +33,12 @@ public class ErrorDto {
         this.path = path;
     }
 
-    public ErrorDto(int status, String message, Map<String, String> errors, String path) {
+    public ErrorDto(int status, String error, String message, String path, Map<String, String> errors) {
         this.timestamp = LocalDateTime.now();
         this.status = status;
+        this.error = error;
         this.message = message;
-        this.errors = errors;
         this.path = path;
+        this.errors = errors;
     }
 }

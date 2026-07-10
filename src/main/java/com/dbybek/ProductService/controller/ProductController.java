@@ -5,6 +5,7 @@ import com.dbybek.ProductService.dto.ProductResponseDTO;
 import com.dbybek.ProductService.dto.UpdateProductDTO;
 import com.dbybek.ProductService.exception.ProductNotAvailableException;
 import com.dbybek.ProductService.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class ProductController {
 //            "image": "http://example.com"
 //    }
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
@@ -36,7 +37,7 @@ public class ProductController {
                                  Whenever someone is hitting /products with post request
                                  please execute the below method.
                               */
-    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody CreateProductDTO body) {
+    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody CreateProductDTO body) {
         ProductResponseDTO productResponseDTO = productService.createProduct(body);
         return new ResponseEntity<>(productResponseDTO, HttpStatus.OK);
     }
@@ -66,7 +67,8 @@ public class ProductController {
                                     Whenever someone is doing a put request on /products/{id}
                                     please execute the below method.
                                  */
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long productId, @RequestBody UpdateProductDTO productDTO) throws ProductNotAvailableException {
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long productId,
+                                                            @Valid @RequestBody UpdateProductDTO productDTO) throws ProductNotAvailableException {
         ProductResponseDTO updatedProduct = productService.updateProduct(productId,productDTO);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
