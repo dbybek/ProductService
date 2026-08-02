@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Category extends BaseModel {
-//    private Long id; -> This field is extended from parent class BaseModel.
     private String title;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;

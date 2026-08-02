@@ -8,10 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper {
-    public Product toEntity(CreateProductDTO dto){
-        if(dto == null){
-            return null;
-        }
+    public Product toEntity(CreateProductDTO dto) {
         Product product = new Product();
         product.setTitle(dto.getTitle());
         product.setDescription(dto.getDescription());
@@ -21,8 +18,8 @@ public class ProductMapper {
         return product;
     }
 
-    public ProductResponseDTO toResponseDTO(Product product){
-        if(product == null){
+    public ProductResponseDTO toResponseDTO(Product product) {
+        if (product == null) {
             return null;
         }
 
@@ -39,21 +36,20 @@ public class ProductMapper {
         return dto;
     }
 
-    // TODO: Remove these validation checks after implementing Jakarta Bean Validation (@Valid) on Day 4.
-    public void updateEntity(Product product, UpdateProductDTO dto){
-        if(dto == null){
+    public void updateEntity(Product product, UpdateProductDTO dto) {
+        if (dto == null) {
             return;
         }
-        if(dto.getTitle()!=null && !dto.getTitle().isBlank()){
+        if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
             product.setTitle(dto.getTitle());
         }
-        if(dto.getDescription()!=null && !dto.getDescription().isBlank()){
+        if (dto.getDescription() != null && !dto.getDescription().isBlank()) {
             product.setDescription(dto.getDescription());
         }
-        if(dto.getPrice()!=null && !dto.getPrice().isInfinite() && !dto.getPrice().isNaN()){
+        if (dto.getPrice() != null && !dto.getPrice().isInfinite() && !dto.getPrice().isNaN()) {
             product.setPrice(dto.getPrice());
         }
-        if(dto.getImageUrl()!=null && !dto.getImageUrl().isBlank()){
+        if (dto.getImageUrl() != null && !dto.getImageUrl().isBlank()) {
             product.setImageUrl(dto.getImageUrl());
         }
     }

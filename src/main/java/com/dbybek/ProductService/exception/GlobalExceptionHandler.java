@@ -18,11 +18,11 @@ public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    //✅ Product Not Available
+    // Product Not Available
     @ExceptionHandler(ProductNotAvailableException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDto handleProductNotAvailable(ProductNotAvailableException ex, HttpServletRequest request){
-        log.error("Exception occurred.", ex);
+    public ErrorDto handleProductNotAvailable(ProductNotAvailableException ex, HttpServletRequest request) {
+        log.error("Product not found exception.", ex);
         return new ErrorDto(
                 HttpStatus.NOT_FOUND.value(),
                 HttpStatus.NOT_FOUND.getReasonPhrase(),
@@ -31,10 +31,10 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // ✅ Validation Errors
+    // Validation Errors
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDto handleValidationErrors(MethodArgumentNotValidException ex, HttpServletRequest request){
+    public ErrorDto handleValidationErrors(MethodArgumentNotValidException ex, HttpServletRequest request) {
         log.error("Validation Exception occurred.", ex);
         Map<String, String> errors = new LinkedHashMap<>();
 
@@ -45,13 +45,13 @@ public class GlobalExceptionHandler {
         return new ErrorDto(
                 HttpStatus.BAD_REQUEST.value(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
-                "Validation failed",
+                "Validation exception occurred.",
                 request.getRequestURI(),
                 errors
         );
     }
 
-    // ✅ Fallback (VERY IMPORTANT)
+    // Fallback (VERY IMPORTANT)
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto handleGeneralException(Exception ex, HttpServletRequest request) {

@@ -13,34 +13,34 @@ import java.util.List;
 @SpringBootTest
 class ProductServiceApplicationTests {
 
-	@Autowired
-	private ProductRepository productRepository;
-	private CategoryRepository categoryRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    private CategoryRepository categoryRepository;
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
-	@Test
-	void testingQueries(){
+    @Test
+    void testingQueries() {
 /*
 		List<Product> products = productRepository.getProductByCategoryId(1L);
 		System.out.println(products.get(0));
 */
 
         List<Product> products = productRepository.getProductByCategoryIdWithNativeQueries(1L);
-		System.out.println(products.get(0));
-	}
+        System.out.println(products.get(0));
+    }
 
-	@Test
-	void fetchCategoryLazy(){
-		Category cat = categoryRepository.findById(1L).get();
-		System.out.println(cat.getId());
-		System.out.println("We are done here.");
+    @Test
+    void fetchCategoryLazy() {
+        Category cat = categoryRepository.findById(1L).get();
+        System.out.println(cat.getId());
+        System.out.println("We are done here.");
 
-		List<Product> catProducts = cat.getProducts();
-		System.out.println(catProducts);
-		System.out.println("Products fetched.");
-	}
+        List<Product> catProducts = cat.getProducts();
+        System.out.println(catProducts);
+        System.out.println("Products fetched.");
+    }
 
 }
